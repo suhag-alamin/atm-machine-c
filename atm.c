@@ -52,7 +52,7 @@ int main() {
     }
 
     while (again && authorized) {
-        printf("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n");
+        printf("\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-\n");
         printf("Welcome back %s\n\n", name);
 
         printf("******************Please choose one of the options below******************\n\n");
@@ -182,8 +182,8 @@ bool login() {
     int option;
     
 
-    while (tries < maxTries) {
-        printf("Enter your pin:\t");
+    while (tries < maxTries || !loginSuccess) {
+        printf("Enter your pin: ");
         scanf("%d", &pin);
 
         if (loginPin == pin) {
@@ -200,9 +200,11 @@ bool login() {
                 printf("Your Selection:\t");
                 scanf("%d", &option);
                 if (option == 1) {
-                    login();
+                    // login();
                 } else if (option == 2) {
-                    loginSuccess =  signUp();
+                    signUp();
+                    loginSuccess = true;
+                    break;
                 } else {
                     printf("Invalid Selection\n");
                 }
@@ -220,23 +222,22 @@ bool signUp() {
     int maxTries = 3;
     bool signUpSuccess = false;
 
-    while (tries < maxTries) {
-        printf("Enter your name:\t");
+    while (tries < maxTries || !signUpSuccess) {
+        printf("Enter your name: ");
         scanf("%s", &name);
 
-        printf("Enter your pin:\t");
+        printf("Enter your pin: ");
         scanf("%d", &pin);
 
-        printf("Re-enter your pin:\t");
+        printf("Re-enter your pin: ");
         scanf("%d", &pin2);
 
         if (pin == pin2) {
             printf("\nYou have successfully signed up!\n");
             // add balance 
-            printf("Enter your initial balance:\t");
+            printf("Enter your initial balance: ");
             scanf("%f", &balance);
-            
-
+        
             signUpSuccess = true;
             break;
         } else {
